@@ -1,1 +1,58 @@
+# ============================
+#  Control of line endings
+# ============================
+
+# Default, convert CRLF → LF, allow CRLF in Windows when checkout its use.
+* text=auto
+
+# Scripts must use LF
+*.sh text eol=lf
 .husky/* text eol=lf
+
+# configuration files
+*.json text eol=lf
+*.cjs text eol=lf
+*.mjs text eol=lf
+*.js  text eol=lf
+*.ts  text eol=lf
+*.tsx text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.md  text eol=lf
+*.yaml text eol=lf
+*.yml  text eol=lf
+
+# ============================
+#  UTF-8
+# ============================
+*.ts  text working-tree-encoding=UTF-8
+*.tsx text working-tree-encoding=UTF-8
+*.js  text working-tree-encoding=UTF-8
+*.jsx text working-tree-encoding=UTF-8
+*.json text working-tree-encoding=UTF-8
+*.md text working-tree-encoding=UTF-8
+
+# ============================
+#  Binary files
+# ============================
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.webp binary
+*.svg  text
+*.ico  binary
+*.mp4  binary
+*.mov  binary
+*.pdf  binary
+*.woff binary
+*.woff2 binary
+*.ttf  binary
+*.eot  binary
+
+# ============================
+#  Lock files
+# ============================
+pnpm-lock.yaml text eol=lf
+package-lock.json -text
+yarn.lock -text
