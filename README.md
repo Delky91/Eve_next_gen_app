@@ -118,7 +118,7 @@ Crear una app donde un usuario pueda:
 
 - [x] Crear proyecto Next.js.
 - [x] Migrar a pnpm y habilitar Corepack.
-- [ ] Instalar TailwindCSS.
+- [x] Instalar TailwindCSS.
 - [ ] Instalar shadcn/ui.
 - [ ] Crear estructura de carpetas.
 
