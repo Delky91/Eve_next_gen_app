@@ -17,24 +17,13 @@ import {
 import {
   Field,
   FieldContent,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-  FieldLegend,
   FieldSeparator,
-  FieldSet,
-  FieldTitle,
 } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroupTextarea,
-} from "@/components/ui/input-group";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { systemFormType } from "@/lib/types/zodTypes";
-import { Label } from "@/components/ui/label";
 import { langOptions } from "@/lib/const";
 import {
   Select,
@@ -43,6 +32,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Search } from "lucide-react";
 
 export const SystemForm = () => {
   const systemForm = useForm<systemFormType>({
@@ -114,7 +104,16 @@ export const SystemForm = () => {
                 return (
                   <Field aria-invalid={isInvalid}>
                     <FieldLabel htmlFor={field.name}>System Name</FieldLabel>
-                    <Input {...field} id={field.name} aria-invalid={isInvalid} />
+                    <InputGroup>
+                      <InputGroupInput
+                        value={field.value}
+                        onChange={field.onChange}
+                        placeholder={"Jita"}
+                      />
+                      <InputGroupAddon>
+                        <Search />
+                      </InputGroupAddon>
+                    </InputGroup>
                     {isInvalid && <FieldError errors={[fieldState.error]} />}
                   </Field>
                 );
