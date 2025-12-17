@@ -35,8 +35,14 @@ import {
 } from "@/components/ui/input-group";
 import { systemFormType } from "@/lib/types/zodTypes";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { langOptions } from "@/lib/const";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const SystemForm = () => {
   const systemForm = useForm<systemFormType>({
@@ -50,7 +56,8 @@ export const SystemForm = () => {
 
   function onSubmit(data: systemFormType) {
     console.log(data);
-    toast.success("System Search Successful");
+    toast.success(`looking for ${data.system} in ${data.lang} language...`);
+    systemForm.reset();
   }
 
   return (
@@ -68,31 +75,30 @@ export const SystemForm = () => {
               render={({ field, fieldState }) => {
                 const isInvalid = fieldState.invalid;
                 return (
-                  <FieldSet>
-                    <FieldLegend>Language</FieldLegend>
-                    <FieldDescription>Select a language for the search</FieldDescription>
-                    <RadioGroup
-                      name={field.name}
-                      value={field.value}
-                      onValueChange={field.onChange}
-                    >
-                      {langOptions.map((lang) => (
-                        <FieldLabel key={lang.id} htmlFor={`form-radio-${lang.lang}`}>
-                          <Field orientation={"horizontal"} data-invalid={isInvalid}>
-                            <FieldContent>
-                              <FieldTitle>{lang.description}</FieldTitle>
-                            </FieldContent>
-                            <RadioGroupItem
-                              value={lang.lang}
-                              id={`form-radio-${lang.lang}`}
-                              aria-invalid={isInvalid}
-                            />
-                          </Field>
-                        </FieldLabel>
-                      ))}
-                    </RadioGroup>
-                    {isInvalid && <FieldError errors={[fieldState.error]} />}
-                  </FieldSet>
+                  <Field orientation="responsive" data-invalid={isInvalid}>
+                    <FieldContent>
+                      <FieldLabel htmlFor={"form-system-select"}>
+                        Select a Language for the search
+                      </FieldLabel>
+                      {isInvalid && <FieldError errors={[fieldState.error]} />}
+                    </FieldContent>
+                    <Select name={field.name} value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger
+                        id={"form-system-select"}
+                        aria-invalid={isInvalid}
+                        className="min-w-32"
+                      >
+                        <SelectValue placeholder="Select" />
+                      </SelectTrigger>
+                      <SelectContent position="item-aligned">
+                        {langOptions.map((lang) => (
+                          <SelectItem key={lang.id} value={lang.lang} className="hover:font-bold">
+                            {lang.description}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </Field>
                 );
               }}
             />
