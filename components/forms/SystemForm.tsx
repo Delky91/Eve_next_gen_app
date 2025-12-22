@@ -16,69 +16,119 @@ import {
 } from "@/components/ui/card";
 import {
   Field,
-  FieldDescription,
+  FieldContent,
   FieldError,
   FieldGroup,
   FieldLabel,
-  FieldLegend,
-  FieldSet,
+  FieldSeparator,
 } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroupTextarea,
-} from "@/components/ui/input-group";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { systemFormType } from "@/lib/types/zodTypes";
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-
-const langAccepted = ["en", "es", "ko", "zh", "ja"];
+import { langOptions } from "@/lib/const";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Search } from "lucide-react";
 
 export const SystemForm = () => {
-    const systemForm = useForm<systemFormType>({
-        resolver: zodResolver(systemFormSchema),
-        defaultValues: {
-            lang: "en",
-            system: ""
-        }
-    })
+  const systemForm = useForm<systemFormType>({
+    resolver: zodResolver(systemFormSchema),
+    mode: "onSubmit",
+    defaultValues: {
+      lang: "en",
+      system: "",
+    },
+  });
 
-    function onSubmit(data: systemFormType){
-        console.log(data); 
-    }
+  function onSubmit(data: systemFormType) {
+    console.log(data);
+    toast.success(`looking for ${data.system} in ${data.lang} language...`);
+    systemForm.reset();
+  }
 
-    return (
-        <Card className="w-full sm:max-w-md">
-            <CardHeader>
-                <CardTitle>
-                    System Search
-                </CardTitle>
-                <CardDescription>
-                    placeholder
-                </CardDescription>
-            </CardHeader>
-            <CardContent>
-                <form id="systemForm" onSubmit={systemForm.handleSubmit(onSubmit)}>
-                    <FieldGroup>
-                        <Controller name="lang"
-                        control={systemForm.control}
-                        render={({field, fieldState})=> (
-                            <FieldSet>
-                                <FieldLegend>
-                                    Select your language for the search
-                                </FieldLegend>
-                                <FieldDescription>PlaceHolder</FieldDescription>
-                                <RadioGroup name={field.name} value={field.value} onValueChange={field.onChange}>
-                                    
-                                </RadioGroup>
-                            </FieldSet>
-                        )}
-                        />
-                    </FieldGroup>
-                </form>
-            </CardContent>
-        </Card>
-    )
-}
+  return (
+    <Card className="w-full sm:max-w-md">
+      <CardHeader className="border-b">
+        <CardTitle>System Search</CardTitle>
+        <CardDescription>placeholder</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form id="systemForm" onSubmit={systemForm.handleSubmit(onSubmit)}>
+          <FieldGroup>
+            <Controller
+              name="lang"
+              control={systemForm.control}
+              render={({ field, fieldState }) => {
+                const isInvalid = fieldState.invalid;
+                return (
+                  <Field orientation="responsive" data-invalid={isInvalid}>
+                    <FieldContent>
+                      <FieldLabel htmlFor={"form-system-select"}>
+                        Select a Language for the search
+                      </FieldLabel>
+                      {isInvalid && <FieldError errors={[fieldState.error]} />}
+                    </FieldContent>
+                    <Select name={field.name} value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger
+                        id={"form-system-select"}
+                        aria-invalid={isInvalid}
+                        className="min-w-32"
+                      >
+                        <SelectValue placeholder="Select" />
+                      </SelectTrigger>
+                      <SelectContent position="item-aligned">
+                        {langOptions.map((lang) => (
+                          <SelectItem key={lang.id} value={lang.lang} className="hover:font-bold">
+                            {lang.description}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </Field>
+                );
+              }}
+            />
+
+            <FieldSeparator />
+
+            <Controller
+              name="system"
+              control={systemForm.control}
+              render={({ field, fieldState }) => {
+                const isInvalid = fieldState.invalid;
+
+                return (
+                  <Field aria-invalid={isInvalid}>
+                    <FieldLabel htmlFor={field.name}>System Name</FieldLabel>
+                    <InputGroup>
+                      <InputGroupInput
+                        value={field.value}
+                        onChange={field.onChange}
+                        placeholder={"Jita"}
+                      />
+                      <InputGroupAddon>
+                        <Search />
+                      </InputGroupAddon>
+                    </InputGroup>
+                    {isInvalid && <FieldError errors={[fieldState.error]} />}
+                  </Field>
+                );
+              }}
+            />
+          </FieldGroup>
+        </form>
+      </CardContent>
+      <CardFooter>
+        <Field orientation="horizontal">
+          <Button type="submit" form="systemForm" disabled={!systemForm.formState.isValid}>
+            Search
+          </Button>
+        </Field>
+      </CardFooter>
+    </Card>
+  );
+};
