@@ -1,9 +1,19 @@
-export function decounce<T extends (...args: unknown[]) => void>(fn: T, delay: number = 400) {
-  let timeoutId: ReturnType<typeof setTimeout>;
+import { useEffect, useState } from "react";
 
-  return (...args: Parameters<T>) => {
-    clearTimeout(timeoutId);
+function useDebounce<T>(value: T, delay: number): T {
+  const [debouncedValue, setDebouncedValue] = useState(value);
 
-    timeoutId = setTimeout(() => fn(...args), delay);
-  };
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
 }
+
+export default useDebounce;
