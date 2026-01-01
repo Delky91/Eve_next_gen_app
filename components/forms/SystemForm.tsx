@@ -35,8 +35,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useMemo } from "react";
+import { useRouter } from "next/navigation";
 
 export const SystemForm = () => {
+  const router = useRouter();
   const systemForm = useForm<systemFormType>({
     resolver: zodResolver(systemFormSchema),
     mode: "onSubmit",
@@ -59,6 +61,7 @@ export const SystemForm = () => {
   function onSubmit(data: systemFormType) {
     console.log(data);
     toast.success(`looking for ${data.system} in ${data.lang} language...`);
+    router.push(`/system?id=${data.system}&lang=${data.lang}`);
     systemForm.reset();
   }
 
