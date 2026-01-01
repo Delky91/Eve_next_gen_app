@@ -25,3 +25,11 @@ export const langOptions = [
     description: "Japanese",
   },
 ];
+
+export const langLabels: Record<string, string> = {
+  en: "English",
+  es: "Español",
+  ko: "한국어",
+  zh: "中文",
+  ja: "日本語",
+};
