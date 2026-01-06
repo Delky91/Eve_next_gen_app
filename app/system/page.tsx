@@ -3,6 +3,7 @@
 import React from "react";
 import { getSystemInfo } from "@/lib/actions/getSystemInfo";
 import { Lang } from "@/lib/types/types";
+import SystemResult from "@/components/systemResult/SystemResult";
 
 const SystemResultPage = async ({
   searchParams,
@@ -17,7 +18,7 @@ const SystemResultPage = async ({
 
   return (
     <div>
-      {id}, {lang}
+      <SystemResult data={data} />
     </div>
   );
 };
