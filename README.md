@@ -119,13 +119,13 @@ Crear una app donde un usuario pueda:
 - [x] Crear proyecto Next.js.
 - [x] Migrar a pnpm y habilitar Corepack.
 - [x] Instalar TailwindCSS.
-- [ ] Instalar shadcn/ui.
-- [ ] Crear estructura de carpetas.
+- [x] Instalar shadcn/ui.
+- [x] Crear estructura de carpetas.
 
 ### 2. Funcionalidades Base (sin BD)
 
-- [ ] Crear formulario para buscar un sistema
-- [ ] Cargar planetas por sistema desde data estática
+- [x] Crear formulario para buscar un sistema
+- [x] Cargar planetas por sistema desde data estática
 - [ ] Crear UI para ingresar porcentajes PI manualmente
 - [ ] Guardar datos en localStorage
 - [ ] Panel resumen de planetas + porcentajes
