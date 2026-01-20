@@ -1,6 +1,6 @@
 "use client";
 //form
-import { systemFormSchema } from "@/lib/validations/systemFormValidations";
+import { systemFormSchema } from "@/lib/validations/formsSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 //components

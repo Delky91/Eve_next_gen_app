@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { SystemPIResponse } from "@/lib/types/types";
 import { toRoman } from "@/lib/math";
+import PlanetForm from "@/components/forms/PlanetForm";
 
 function SystemResult({ data }: { data: SystemPIResponse | null }) {
   if (!data) return <div>No system found</div>;
@@ -26,18 +27,24 @@ function SystemResult({ data }: { data: SystemPIResponse | null }) {
         <Accordion type="single" collapsible>
           {planets.map((planet, index) => {
             const romanIndex = toRoman(index + 1);
+            const planetName = systemName + " " + romanIndex + " " + planet.planetType.key;
 
             return (
               <AccordionItem value={String(planet.planetId)} key={planet.planetId}>
                 <AccordionTrigger className="text-lg font-semibold capitalize">
-                  {systemName} {romanIndex} {planet.planetType.key}
+                  {planetName}
                 </AccordionTrigger>
                 <AccordionContent>
                   <p className="mb-2 text-lg font-semibold">Materials P0:</p>
                   {planet.materials.map((mat) => {
                     return (
-                      <div key={mat.id}>
-                        <p className="capitalize">{mat.name}</p>
+                      <div key={mat.id} className="flex">
+                        <p className="flex-2 capitalize">{mat.name}</p>
+                        <PlanetForm
+                          planetName={planetName}
+                          systemName={systemName}
+                          materialName={mat.name}
+                        />
                       </div>
                     );
                   })}

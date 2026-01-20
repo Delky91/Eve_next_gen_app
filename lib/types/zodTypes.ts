@@ -1,4 +1,5 @@
 import * as z from "zod";
-import { systemFormSchema } from "../validations/systemFormValidations";
+import { planetFormSchema, systemFormSchema } from "../validations/formsSchemas";
 
 export type systemFormType = z.infer<typeof systemFormSchema>;
+export type planetFormType = z.infer<typeof planetFormSchema>;
