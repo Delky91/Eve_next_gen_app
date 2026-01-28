@@ -31,18 +31,22 @@ export type SystemPIResponse = {
   systemId: number;
   systemName: string;
   securityStatus: number;
-  planets: {
-    planetId: number;
-    planetType: {
-      key: string;
-      name: string;
-    };
-    materials: {
-      id: number;
-      name: string;
-      volume: number | null;
-    }[];
-  }[];
+  planets: Planet[];
+};
+
+export type Planet = {
+  planetId: string;
+  planetType: {
+    key: string;
+    name: string;
+  };
+  materials: Material[];
+};
+
+type Material = {
+  id: number;
+  name: string;
+  volume: number | null;
 };
 
 export type SystemsDictMap = Record<

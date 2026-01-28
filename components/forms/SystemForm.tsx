@@ -66,7 +66,7 @@ export const SystemForm = () => {
   }
 
   return (
-    <Card className="w-full sm:max-w-md">
+    <Card className="mx-auto w-full sm:max-w-md">
       <CardHeader className="border-b">
         <CardTitle>System Search</CardTitle>
         <CardDescription>placeholder</CardDescription>

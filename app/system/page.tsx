@@ -24,21 +24,3 @@ const SystemResultPage = async ({
 };
 
 export default SystemResultPage;
-
-/* Example output:
-* {
-  systemId: 30000142,
-  systemName: 'Jita',
-  securityStatus: 0.945913,
-  planets: [
-    { planetId: 40009077, planetType: [Object], materials: [Array] },
-    { planetId: 40009078, planetType: [Object], materials: [Array] },
-    { planetId: 40009080, planetType: [Object], materials: [Array] },
-    { planetId: 40009082, planetType: [Object], materials: [Array] },
-    { planetId: 40009098, planetType: [Object], materials: [Array] },
-    { planetId: 40009116, planetType: [Object], materials: [Array] },
-    { planetId: 40009119, planetType: [Object], materials: [Array] },
-    { planetId: 40009123, planetType: [Object], materials: [Array] }
-  ]
-}
-*  */

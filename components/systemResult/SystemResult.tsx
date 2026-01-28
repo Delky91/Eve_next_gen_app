@@ -35,19 +35,7 @@ function SystemResult({ data }: { data: SystemPIResponse | null }) {
                   {planetName}
                 </AccordionTrigger>
                 <AccordionContent>
-                  <p className="mb-2 text-lg font-semibold">Materials P0:</p>
-                  {planet.materials.map((mat) => {
-                    return (
-                      <div key={mat.id} className="flex">
-                        <p className="flex-2 capitalize">{mat.name}</p>
-                        <PlanetForm
-                          planetName={planetName}
-                          systemName={systemName}
-                          materialName={mat.name}
-                        />
-                      </div>
-                    );
-                  })}
+                  <PlanetForm planet={planet} systemName={systemName} />
                 </AccordionContent>
               </AccordionItem>
             );

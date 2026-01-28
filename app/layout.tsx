@@ -37,7 +37,7 @@ export default function RootLayout({
         >
           <Navbar />
           <Toaster />
-          {children}
+          <div className="pt-16">{children}</div>
         </ThemeProvider>
       </body>
     </html>
