@@ -36,17 +36,20 @@ export type SystemPIResponse = {
 
 export type Planet = {
   planetId: string;
-  planetType: {
-    key: string;
-    name: string;
-  };
+  planetType: PlanetType;
   materials: Material[];
+};
+
+export type PlanetType = {
+  key: string;
+  name: string;
 };
 
 type Material = {
   id: number;
   name: string;
   volume: number | null;
+  amount?: number;
 };
 
 export type SystemsDictMap = Record<
@@ -55,3 +58,14 @@ export type SystemsDictMap = Record<
     name: Record<Lang, string>;
   }
 >;
+
+export type MaterialSystemPI = {
+  id: number;
+  amount: number;
+};
+
+export type SystemPIPlanets = {
+  planetID: number;
+  planetType: PlanetType;
+  materials: MaterialSystemPI[];
+};

@@ -1,5 +1,4 @@
 // show the result of system search
-
 import React from "react";
 import { getSystemInfo } from "@/lib/actions/getSystemInfo";
 import { Lang } from "@/lib/types/types";
@@ -8,7 +7,7 @@ import SystemResult from "@/components/systemResult/SystemResult";
 const SystemResultPage = async ({
   searchParams,
 }: {
-  searchParams: { id: string; lang: Lang | undefined };
+  searchParams: Promise<{ id: string; lang: Lang | undefined }>;
 }) => {
   // search for the info of the system
   const { id, lang } = await searchParams;
@@ -16,11 +15,7 @@ const SystemResultPage = async ({
 
   const data = await getSystemInfo(id, lang);
 
-  return (
-    <div>
-      <SystemResult data={data} />
-    </div>
-  );
+  return <SystemResult data={data} />;
 };
 
 export default SystemResultPage;
